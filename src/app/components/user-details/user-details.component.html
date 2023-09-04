@@ -1,0 +1,45 @@
+<div *ngIf="userDetailsArray.length" class="flex w-full justify-center pt-10">
+  <table class="w-3/5">
+    <tr class="bg-gray-200">
+      <th class="p-5 font-semibold">Name</th>
+      <th class="p-5 font-semibold">Company name</th>
+      <th class="p-5 font-semibold">Designation</th>
+    </tr>
+    <tr>
+      <td class="p-2">
+        <app-search-bar
+          name="name"
+          placeholder="Enter a name.."
+          (searchKeyEmit)="catchKey($event)"
+        ></app-search-bar>
+      </td>
+      <td class="p-2">
+        <app-search-bar
+          name="company"
+          (searchKeyEmit)="catchKey($event)"
+          placeholder="Enter a company.."
+        ></app-search-bar>
+      </td>
+      <td class="p-2">
+        <app-search-bar
+          name="designation"
+          (searchKeyEmit)="catchKey($event)"
+          placeholder="Enter a designation.."
+        ></app-search-bar>
+      </td>
+    </tr>
+    <tr
+      [ngClass]="
+        user.company.designation === 'angular Developer' ? 'bg-green-400' : ''
+      "
+      *ngFor="let user of userDetailsArray | filter:nameKey:companyKey:designationKey"
+    >
+      <td class="p-3">
+        <span>{{ user.name }}</span
+        ><br /><span class="text-gray-600">{{ user.email }}</span>
+      </td>
+      <td class="p-3">{{ user.company.name }}</td>
+      <td class="p-3">{{ user.company.designation }}</td>
+    </tr>
+  </table>
+</div>
